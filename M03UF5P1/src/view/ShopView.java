@@ -89,6 +89,9 @@ public class ShopView extends JFrame implements ActionListener, KeyListener{
 		addStock.addActionListener(this);
 		viewInventory.addActionListener(this);
 		deleteProduct.addActionListener(this);
+		
+		contentPane.setFocusable(true);
+        contentPane.addKeyListener(this);
 	}
 	
 	@Override
@@ -123,19 +126,40 @@ public class ShopView extends JFrame implements ActionListener, KeyListener{
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		int key = e.getKeyCode();
+        
+		switch (key) {
+            case KeyEvent.VK_ESCAPE:
+                System.exit(0);
+                break;
+                
+            case KeyEvent.VK_1:
+                showCash.doClick();
+                break;
+                
+            case KeyEvent.VK_2:
+                addProduct.doClick();
+                break;
+                
+            case KeyEvent.VK_3:
+                addStock.doClick();
+                break;
+                
+            case KeyEvent.VK_5:
+                viewInventory.doClick();
+                break;
+                
+            case KeyEvent.VK_9:
+                deleteProduct.doClick();
+                break;
+        }
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 }
