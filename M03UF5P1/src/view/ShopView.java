@@ -31,11 +31,21 @@ public class ShopView extends JFrame implements ActionListener, KeyListener{
     private JButton viewInventory;
     private JButton deleteProduct;
     ArrayList<Product> inventory;
+    Shop shop;
 
 	/**
 	 * Create the frame.
 	 */
 	public ShopView() {
+		
+		this.shop = new Shop();
+		
+    	try {
+			inventory = shop.loadInventory();
+		} catch (IOException e1) {
+			
+		}
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -50,7 +60,6 @@ public class ShopView extends JFrame implements ActionListener, KeyListener{
 		contentPane.add(textTitle);
 		
 		showCash = new JButton("1. CONTAR CAJA");
-		showCash.addActionListener(this);
 		showCash.setBounds(135, 73, 147, 23);
 		showCash.setBackground(new Color(255, 255, 255));
 		contentPane.add(showCash);
@@ -85,13 +94,8 @@ public class ShopView extends JFrame implements ActionListener, KeyListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-    	Shop shop = new Shop();
         
-    	try {
-			inventory = shop.loadInventory();
-		} catch (IOException e1) {
-			
-		}
+
 		
 		if (e.getSource() == showCash) {
 			

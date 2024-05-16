@@ -125,19 +125,13 @@ public class ProductView extends JDialog implements ActionListener {
 							Integer.parseInt(stock.getText()));
 
 					dispose();
-					ShopView shopView = new ShopView();
-					shopView.setVisible(true);
 				} else {
 					JOptionPane.showMessageDialog(null, "Error, el producto " + nombre.getText() + " ya existe.",
 							"Product Already Exists", JOptionPane.ERROR_MESSAGE);
 					dispose();
-					ProductView productView = new ProductView(shop, option);
-					productView.setVisible(true);
 				}
 			} else if (e.getSource() == cancelButton) {
 				dispose();
-				ShopView shopView = new ShopView();
-				shopView.setVisible(true);
 			}
 		break;
 
@@ -152,20 +146,14 @@ public class ProductView extends JDialog implements ActionListener {
 					shop.addStock(productFound, Integer.parseInt(stock.getText()));
 
 					dispose();
-					ShopView shopView = new ShopView();
-					shopView.setVisible(true);
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Error, no ha sido posible encontrar el producto " + nombre.getText() + ".",
 							"Error Product Not Found", JOptionPane.ERROR_MESSAGE);
 					dispose();
-					ProductView productView = new ProductView(shop, option);
-					productView.setVisible(true);
 				}
 			} else if (e.getSource() == cancelButton) {
 				dispose();
-				ShopView shopView = new ShopView();
-				shopView.setVisible(true);
 			}
 		break;
 			
@@ -180,20 +168,14 @@ public class ProductView extends JDialog implements ActionListener {
 					shop.deleteProduct(productFound);
 
 					dispose();
-					ShopView shopView = new ShopView();
-					shopView.setVisible(true);
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Error, no ha sido posible eliminar el producto " + nombre.getText() + ".",
 							"Error Delete Stock", JOptionPane.ERROR_MESSAGE);
 					dispose();
-					ProductView productView = new ProductView(shop, option);
-					productView.setVisible(true);
 				}
 			} else if (e.getSource() == cancelButton) {
 				dispose();
-				ShopView shopView = new ShopView();
-				shopView.setVisible(true);
 			}
 		break;
 		}

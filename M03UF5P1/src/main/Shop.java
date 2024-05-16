@@ -121,7 +121,7 @@ public class Shop {
      */
     public void openCashView(Shop shop) {
     	
-		CashView dialog = new CashView(shop);
+    	CashView dialog = new CashView(shop);
 		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
     }
@@ -157,6 +157,7 @@ public class Shop {
      * Add stock for a specific product
      */
     public void addStock(Product product, int newStock) {
+    	newStock += product.getStock();
     	product.setStock(newStock);
     	JOptionPane.showMessageDialog(null, "Se ha añadido stock al producto " + product.getName() + " con éxito!", "Exit Add Stock", JOptionPane.INFORMATION_MESSAGE);
     }

@@ -54,7 +54,5 @@ public class CashView extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		dispose();
-        ShopView shopView = new ShopView();
-        shopView.setVisible(true);
 	}
 }
