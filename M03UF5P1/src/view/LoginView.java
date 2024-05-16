@@ -68,22 +68,19 @@ public class LoginView extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == botonLogin) {
-            int employeeId = Integer.parseInt(textFieldEmployeeId.getText()); 
-            String password = textFieldPassword.getText();
             
-            if (employeeId == 0 || password.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Usuario o password incorrectos", "Error login", JOptionPane.ERROR_MESSAGE);
-            
-            } else {
-                Employee employee = new Employee(employeeId, password);
+        	try {
+                int employeeId = Integer.parseInt(textFieldEmployeeId.getText()); 
+                String password = textFieldPassword.getText();
                 
-                try {
+                if (employeeId == 0 || password.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Usuario o password incorrectos", "Error login", JOptionPane.ERROR_MESSAGE);
+                
+                } else {
+                    Employee employee = new Employee(employeeId, password);
+                    
                     boolean logged = employee.login(employeeId, password);
-                    
-                    if (Constants.MAX_LOGIN_TIMES <= counterErrorLogin) {
-                        throw new LimitLoginException("Error login, 3 intentos superados", counterErrorLogin);
-                    }
-                    
+                      
                     if (logged) {
                         ShopView shop = new ShopView();
                         shop.setExtendedState(NORMAL);
@@ -92,15 +89,30 @@ public class LoginView extends JFrame implements ActionListener {
                     
                     } else {
                         counterErrorLogin++;
+                        JOptionPane.showMessageDialog(null, "Error login, usuario o password incorrectos", "Error login", JOptionPane.ERROR_MESSAGE);
                         textFieldEmployeeId.setText("");
                         textFieldPassword.setText("");
+                        
+                        if (Constants.MAX_LOGIN_TIMES <= counterErrorLogin) {
+                            throw new LimitLoginException(counterErrorLogin);
+                        }
+                        
+                        if ((textFieldEmployeeId.getText()).matches("\\d+")) {
+                            JOptionPane.showMessageDialog(null, "El número de usuario debe contener solo dígitos", "Error login", JOptionPane.ERROR_MESSAGE);
+                            textFieldEmployeeId.setText("");
+                            textFieldPassword.setText("");
+                            throw new NumberFormatException();                            
+                        }
                     }
-                
-                } catch (LimitLoginException ex) {
-                    JOptionPane.showMessageDialog(null, "Error login, superados los intentos de login", "Error intentos", JOptionPane.ERROR_MESSAGE);
-                    dispose();
-                    System.exit(0);
                 }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Error login, el empleado debe ser numérico", "Error login", JOptionPane.ERROR_MESSAGE);
+                textFieldEmployeeId.setText("");
+                textFieldPassword.setText("");
+                
+            } catch (LimitLoginException ex) {
+                JOptionPane.showMessageDialog(null, ex.toString(), "Error login", JOptionPane.ERROR_MESSAGE);
+                dispose();
             }
         }
     }
